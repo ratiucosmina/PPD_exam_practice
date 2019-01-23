@@ -15,9 +15,11 @@ void scalar_product(int threadId, int nrThreads, vector<int> a, vector<int> b) {
 	int end = (a.size()*(threadId + 1)) / nrThreads;
 	int result = 0;
 
+	//fiecare thread calculeaza suma de a[i]b[i] pentru i in [start,end)
 	for (int i = start; i < end; i++)
 		result += a[i] * b[i];
 	
+	//lock mutex si adun la rezultat ce am obtinut
 	unique_lock<mutex> lock(mtx);
 	res += result;
 }

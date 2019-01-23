@@ -12,6 +12,8 @@ vector<thread> threads;
 vector<int> numbers;
 mutex mtx;
 
+
+//o functie simpla, normala, care verifica daca numarul nr e prim
 bool is_prime(int nr) {
 	if (nr < 2)
 		return false;
@@ -25,6 +27,7 @@ void primes(int threadId) {
 	int start = (N*threadId) / nrThreads;
 	int end = (N*(threadId + 1)) / nrThreads;
 
+	//fiecare thread verifica numerele aflate in intervalul [start,end)
 	for(int i=start;i<end;i++)
 		if (is_prime(i)) {
 			unique_lock<mutex> lck(mtx);
